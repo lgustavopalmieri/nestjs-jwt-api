@@ -15,16 +15,4 @@ describe('UserService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
-  it('should return an string for testing sonar configs', () => {
-    const config = 'newConfig';
-    expect(config).toBe('newConfig');
-  });
-  it('should return an string for testing sonar configs', () => {
-    const config = 'newConfig';
-    expect(config).toBe('newConfig');
-  });
-  it('should return an string for testing sonar configs', () => {
-    const config = 'newConfig';
-    expect(config).toBe('newConfig');
-  });
 });

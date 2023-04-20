@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  nestjs-jwt-api:
+    container_name: nestjs-jwt-api
+    image: nestjs-jwt-api
+    build: .
+    ports:
+      - 8888:8888
+    networks:
+      - nestjs-jwt-api-net
+      - nestjs-jwt-api-net-db
+    volumes:
+      - nestjs-jwt-api:/app/node_modules
+      - .:/app
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: 'mailhog'
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+    networks:
+      - nestjs-jwt-api-net
+      - nestjs-jwt-api-net-db
+
+networks:
+  nestjs-jwt-api-net:
+    name: nestjs-jwt-api-net
+
+  nestjs-jwt-api-net-db:
+    external:
+      name: nestjs-jwt-api-net-db
+
+volumes:
+  nestjs-jwt-api:
+    name: nestjs-jwt-api
