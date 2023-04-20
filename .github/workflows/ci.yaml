@@ -3,10 +3,11 @@ on:
   push:
     branches:
       - develop
+      - master
       - '**'
   pull_request:
     types: [opened, synchronize, reopened]
-    
+
 jobs:
   sonarcloud:
     name: SonarCloud
@@ -14,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node: [ 16 ]
+        node: [16]
 
     steps:
       - uses: actions/checkout@v3
@@ -35,7 +36,7 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: SonarQube Quality Gate check
@@ -43,4 +44,4 @@ jobs:
         uses: sonarsource/sonarqube-quality-gate-action@master
         timeout-minutes: 5
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
