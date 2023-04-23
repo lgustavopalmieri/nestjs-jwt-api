@@ -16,8 +16,8 @@ const cli = {
 
 module.exports = {
   cli,
-  entities: ['dist/modules/**/entities/*.entity.js'],
-  migrations: ['dist/database/migrations/**/*.js'],
+  entities: ['dist/src/modules/**/*.entity.js'],
+  migrations: ['dist/src/database/migrations/**/*.js'],
   migrationsTableName: 'migrations_nestjs-jwt-api',
   synchronize: false,
   ...(env[process.env.NODE_ENV] || {}),

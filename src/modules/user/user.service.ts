@@ -5,6 +5,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import AlreadyExistsException from 'src/exceptions/already-exists.exception';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -21,7 +22,15 @@ export class UserService {
     if (userExists.length) {
       throw new AlreadyExistsException({ entity: 'user' });
     }
-    return 'This action adds a new user';
+
+    const newUser = this.userRepo.create({
+      ...createUserDto,
+      password: await bcrypt.hash(createUserDto.password, 12),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    return await this.userRepo.save(newUser);
   }
 
   findAll() {
