@@ -1,10 +1,26 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
+import AlreadyExistsException from 'src/exceptions/already-exists.exception';
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
+  constructor(@InjectRepository(User) private userRepo: Repository<User>) {}
+  async register(createUserDto: CreateUserDto) {
+    const userExists = await this.userRepo.find({
+      where: [
+        {
+          email: createUserDto.email,
+        },
+      ],
+    });
+
+    if (userExists.length) {
+      throw new AlreadyExistsException({ entity: 'user' });
+    }
     return 'This action adds a new user';
   }
 
