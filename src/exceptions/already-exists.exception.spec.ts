@@ -18,13 +18,13 @@ const results = [
 ];
 
 describe('AlreadyExistsException', () => {
-  it('should not throw an exception', () => {
-    const testFirstName = AlreadyExistsException({
+  it('should not throw an exception', async () => {
+    const testFirstName = await AlreadyExistsException({
       result: results.filter((result) => result.first_name === 'User Five'),
       entity: 'User',
     });
 
-    const testEmail = AlreadyExistsException({
+    const testEmail = await AlreadyExistsException({
       result: results.filter((result) => result.email === 'user-five@mail.com'),
       entity: 'User',
     });

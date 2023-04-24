@@ -11,7 +11,7 @@ export default async function AlreadyExistsException({
 }: IAlreadyExistsException<typeof result>) {
   const exists = result;
 
-  if (exists.length) {
+  if (exists?.length) {
     throw new BadRequestException({
       message: `This ${entity} already exists.`,
     });

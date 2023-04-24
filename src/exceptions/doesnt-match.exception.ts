@@ -13,7 +13,7 @@ export default async function DoesntMatchException({
 }: IDoesntMatchException) {
   if (onValue !== onConfirmValue) {
     throw new BadRequestException({
-      message: `${doesntMatches} doesn't match`,
+      message: `${doesntMatches} doesn't match.`,
     });
   }
 }
