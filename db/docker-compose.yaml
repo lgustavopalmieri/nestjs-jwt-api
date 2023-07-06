@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  nestjs-jwt-api-db:
+    image: postgres:14.1
+    container_name: nestjs-jwt-api-db
+    restart: always
+    env_file:
+      - ./config.env
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    networks:
+      - nestjs-jwt-api-net-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - nestjs-jwt-api-vol-db:/var/lib/postgresql/data
+
+networks:
+  nestjs-jwt-api-net-db:
+    name: nestjs-jwt-api-net-db
+
+volumes:
+  nestjs-jwt-api-vol-db:
+    name: nestjs-jwt-api-vol-db

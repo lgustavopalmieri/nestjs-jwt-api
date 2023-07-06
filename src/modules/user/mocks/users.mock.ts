@@ -30,6 +30,7 @@ export const users = [
     updatedAt: expect.anything(),
   },
 ];
+
 export const mockRepository = {
   register: jest.fn(),
   save: jest.fn(),
